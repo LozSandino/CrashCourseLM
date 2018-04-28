@@ -50,8 +50,8 @@ linreg(y, X, y_hat, sigma_hat, X_tilde)
 # Sample from a multivariate t distribution.
 def random_mv_t(df, Sigma, n):
     p = Sigma.shape[1]
-    den = np.random.chisquare(df, n)
-    num = df * np.random.multivariate_normal(np.zeros(p), Sigma, n)
+    den = np.sqrt(np.random.chisquare(df, n)/df)
+    num = np.random.multivariate_normal(np.zeros(p), Sigma, n)
     return num/den[:, None]
 
 # Bayesian linear regression.
