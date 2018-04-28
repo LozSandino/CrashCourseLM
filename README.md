@@ -35,7 +35,7 @@ Both the function written in Python and in R use the same arguments:
 - `X` the design matrix, which must include the intercept (a column of 1). In Python: an array of shape *(n, p)* (*p* the number of 
 columns). In R: a matrix of dimension *(n, p)*.
 - `X_tilde` the matrix corresponding to the values. In Python: an array of shape *(m, p)* (*m* the number of new observations), `None`
-by default, which generates no estimation of predictions but rather an estimation of `y`. In R: a matrix of dimension *(m, p)*, `NULL`
+by default, which generates no estimation of predictions but rather an estimation of mean. In R: a matrix of dimension *(m, p)*, `NULL`
 by default.
 - `beta_0` the vector of prior means. In Python: an array of shape *(p,)*, `None` by default, which assumes a vector of 0. In R: a vector
 of length *p*, `NULL` by default.
@@ -49,6 +49,12 @@ which assumes it to be equal to 1. In R: a numeric value, `NULL` by default.
 Python and R: a numeric value, 10,000 by default.
 - `alph` the level of tolerance of the credibility intervals. In both Python and R: a numeric value, 0.05 by default.
 - `seed` the seed for the pseudorandom number generators. In both Python and R: a numeric value, 666 by default.
+
+The function returns:
+- `results` a dataframe containing the sample mean and the credibility interval boundaries of the parameters.
+- `beta_sample` an array (Python) or matrix (R) of the sample of the model's coefficients.
+- `sigma2_0` a vector of the sample of the model's variance.
+- `y_hat` a dataframe containing the sample mean and credibility intervals of the predictions or mean estimation.
 
 ---
 ## Author
