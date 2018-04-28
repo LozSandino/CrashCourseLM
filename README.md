@@ -52,7 +52,7 @@ Python and R: a numeric value, 10,000 by default.
 
 ---
 ## Author
-Santiago Lozano Sandino,  
+Santiago Lozano Sandino, MSc in Statistics.  
 e-mail: <lozsandino@gmail.com>  
 LinkedIn user: [lozsandino](https//:www.linkedin.com/in/lozsandino/)
 
