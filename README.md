@@ -54,6 +54,6 @@ Python and R: a numeric value, 10,000 by default.
 ## Author
 Santiago Lozano Sandino,  
 e-mail: <lozsandino@gmail.com>  
-[LinkedIn](https//:www.linkedin.com/in/lozsandino/)
+LinkedIn user: [lozsandino](https//:www.linkedin.com/in/lozsandino/)
 
 
