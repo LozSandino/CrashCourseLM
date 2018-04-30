@@ -74,7 +74,7 @@ bayes_lm <- function(y, X, X_tilde = NULL,
   S2 <- sum((y - X %*% beta_hat)^2)/(n - p)
   
   # Simulation of sigma2 and beta.
-  sigma2_sample <- (nu_0 * sigma2_0 + (n - p) * S2)/rchisq(size, n - p)
+  sigma2_sample <- (nu_0 * sigma2_0 + (n - p) * S2)/rchisq(size, n + nu_0)
   beta_sample <- t(matrix(rnorm(p * size), ncol = p) * sqrt(sigma2_sample))
   beta_sample <- eig_Sigma_n %*% beta_sample + as.vector(beta_n)
   
@@ -83,7 +83,8 @@ bayes_lm <- function(y, X, X_tilde = NULL,
     y_hat <- X %*% beta_sample
   } else {
     m <- nrow(X_tilde)
-    y_hat <- t(rmvt(size, sigma = diag(rep(1, m)), df = n - p) * sqrt(S2)) +
+    y_hat <- t(rmvt(size, sigma = diag(rep(1, m)), df = n + nu_0) * 
+                 sqrt((sigma2_0 * nu_0 + (n - p) * S2)/(n + nu_0))) +
       c(X_tilde %*% beta_hat)
   }
   

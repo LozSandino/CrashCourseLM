@@ -82,7 +82,7 @@ def bayes_lm(y, X, X_tilde = None,
     S2 = sum((y - X @ beta_hat)**2)/(n - p)
     
     # Simulation of sigma2 and beta.
-    sigma2_sample = (nu_0 * sigma2_0 + (n - p) * S2)/np.random.chisquare(n - p, size)
+    sigma2_sample = (nu_0 * sigma2_0 + (n - p) * S2)/np.random.chisquare(n + nu_0, size)
     beta_sample = np.random.normal(0, 1, size * p)
     beta_sample.shape = (p, size)
     beta_sample = eig_Sigma_n @ (beta_sample * np.sqrt(sigma2_sample)) + beta_n[:, None]
@@ -92,9 +92,9 @@ def bayes_lm(y, X, X_tilde = None,
         y_hat = X @ beta_sample
     else:
         m = X_tilde.shape[0]
-        sim = random_mv_t(n - p, np.diag(np.ones(m)), size)
+        sim = random_mv_t(n + nu_0, np.diag(np.ones(m)), size)
         delta = X_tilde @ beta_hat
-        y_hat = sim.T * np.sqrt(S2) + delta[:, None]
+        y_hat = sim.T * np.sqrt((nu_0 * sigma2_0 + (n - p) * S2)/(n + nu_0)) + delta[:, None]
     
     # Results.
     results = np.column_stack((beta_sample.mean(axis = 1), 
